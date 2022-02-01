@@ -50,7 +50,7 @@ router.get('/subtract', function(req, res, next) {
   var result = 0
   var {num1, num2} = req.query
   if(num1 && num2) {
-      result = utils.add(parseFloat(num1), parseFloat(num2))
+      result = utils.divide(parseFloat(num1), parseFloat(num2))
   }
   res.render('compute', { title: 'subtract' ,result:result, num1, num2, symbol:"-" });
 
