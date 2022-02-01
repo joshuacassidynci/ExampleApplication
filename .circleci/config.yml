@@ -27,7 +27,7 @@ jobs:
           command: npm install
       - run:
           name: test-run
-          command: npm run test; if [[ -e test-results.xml ]]; then cp test-results.xml $CIRCLE_TEST_REPORTS/test-results.xml; fi
+          command: npm run test
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
