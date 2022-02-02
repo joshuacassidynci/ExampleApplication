@@ -8,7 +8,7 @@ pm2 stop example_app
 cd ExampleApplication/
 # Install application dependancies
 npm install
-# Export a varible used in our application so it knows to use https
+# Export a varible used in our application so it knows to use https 
 export ENV=PROD
 echo $privatekey > privatekey.pem
 echo $server > server.crt
