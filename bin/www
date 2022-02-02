@@ -71,17 +71,24 @@ var https_port    =   process.env.PORT_HTTPS || 8443;
 var options = {}
 
 if(process.env.ENV === "PROD") {
-  var privatekey = fs.readFileSync('privatekey.pem')
-  var cert = fs.readFileSync('server.crt')
-  privatekey="-----BEGIN CERTIFICATE----- MIIF8zCCA9ugAwIBAgIUHXXqmJ0EruA+xq8QbLFse5WG8WMwDQYJKoZIhvcNAQEL BQAwgYgxCzAJBgNVBAYTAklFMREwDwYDVQQIDAhMZWluc3RlcjEPMA0GA1UEBwwG RHVibGluMSQwIgYDVQQKDBtOYXRpb25hbCBDb2xsZWdlIG9mIElyZWxhbmQxHDAa BgNVBAsME1NjaG9vbCBvZiBDb21wdXRpbmcxETAPBgNVBAMMCG5jaXJsLmllMB4X DTIyMDIwMjAzMTg0MFoXDTQ5MDYyMDAzMTg0MFowgYgxCzAJBgNVBAYTAklFMREw DwYDVQQIDAhMZWluc3RlcjEPMA0GA1UEBwwGRHVibGluMSQwIgYDVQQKDBtOYXRp b25hbCBDb2xsZWdlIG9mIElyZWxhbmQxHDAaBgNVBAsME1NjaG9vbCBvZiBDb21w dXRpbmcxETAPBgNVBAMMCG5jaXJsLmllMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A MIICCgKCAgEAybOIh9rIMWNQCLxJ1YlWGLjJVTEkmIfq2khL63+2E0qk927ptMbT lsXrpYUQaPHSUIEAY6umOIYPhuDN64i0vUsQC2UTZ1gcZ2YE2ioU5uVORyMVMMsI x6SpNG9MTXTMFSFXlaF25ZrVDlXIg7Xp5toIAHaRQo9B6VCsRODWuPj+Ay2esAon XaItiP1TVGekU60imhYFFE7W45PVVb/gTUJbIMHib+ELAWMa3c3i5iyTxdcu9X7r EpKGRDROl6u9Jek/xfMhBG+g2TDuT5VcJ6AuLOfWxXXTQk6x/Q0lrFfSbUvgD5Xl nz3KjHARplmQp+8uH9DCqzS1iWEDGxQCMzi9CWVwNjNsuSmNGzlVdfklnsaTb7Cc EJroLMba881Xqcih5S9sBBJ3a59reL4WbqXBoDMHWRSi0naccnsZENply3E0eb86 7xPys9UB5Zby99QwlNf4HpFbDp/spVyT9xO3uECr23poVlHxCyL3TjRIu7+0NXCA snnIpOq1B5cc5a98LFgYxcvNdB3/BRkT01X8tdXCX5B9wOYrz5c3E+iADzKPbLWO M8/SOFY+kkvtf1S2zThyVnOQFaS81IwK/XdGraOXwYNsr1uFC9exy+UjBocLVtz9 ODyjU9b2wX4cDscjyrf+RpSWSWs8TU2uhMleU8w7quYKdo3BGJTb6b8CAwEAAaNT MFEwHQYDVR0OBBYEFK5CL+Ya5BhlTULRFClHTlPdZUxdMB8GA1UdIwQYMBaAFK5C L+Ya5BhlTULRFClHTlPdZUxdMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEL BQADggIBAJ7vth2bQRy1gSrXxBRATDOCXLv+3ZONd2DddicTVfHXedMOyFhSGxRY ZWCUQy6grg3hpVnO57sSWAvPAmmHXVm/2CLI7wo7M7+1/RObSWFp7ieWvJCv9bfR xgBs5oqb1UCgriZ34zRbQoSSFIgMpp1i5C7bQOt6hiMcdusI0y9uUJIuATCBLQYB lTWbm4xKipai6ofWI+mArxQGEBYhAhoWUYqIwRJOJE5Cjt9Cf9TNVEg59v05M6bb HxQw64RkJ6mxZsn8gKZKNmayCq3nCIW7XdGTidbleKV7/XCo6s/MOSyVOI7z3ZRC e3VjgLEUR2ymKxRSXoNoTbXilhOj+0nOI7Ckc9q+u46FKlk1Q/7hvvGIYBVCfxra 6gJUP8SyfN60PNV+vID3rwCVXp2y15J6H8lR5VvfQuMRP56cXjk3CLLO9rURo+FU 67e3eVeK2rtGbYPfsSn6Uvzf1ZYRPQbtME2/6H8b2M1yqxWxWGDq2wk8KGrkldua jDmI4gOqNkbtfigTWynV1gNMX2sWrKTSsw6wkLznwai9pTnFMPS5Uks3MAei6CeK Rry9Do0VxukZZqp9VNiS96lt31PXKb3UfK01XZwmFINwy6bOzcTeLh1KqIipluC0 HgTqVfR5vdDRANeOoZNeWOsKziM7iTsr9gIgHn2Uj5y02yiCOAdf -----END CERTIFICATE-----"
-  var header = "-----BEGIN CERTIFICATE-----"
-  var footer = "-----END CERTIFICATE-----"
+  var privatekey = fs.readFileSync('privatekey.pem', "utf8")
+  console.log(typeof privatekey)
+  var cert = fs.readFileSync('server.crt', "utf8")
+  var header = "-----BEGIN PRIVATE KEY-----"
+  var footer = "-----END PRIVATE KEY-----"
+  console.log(privatekey.split(header))
   privatekey= privatekey.split(header)[1]
   privatekey = privatekey.split(footer)[0]
-  privatekey = header + "\n" + privatekey.replaceAll(" ", "\n") + footer+"\n"
+  privatekey = header + "\n" + privatekey.replace(/ /g, "\n") + footer+"\n"
+
+  console.log(privatekey)
+
+
+  var header = "-----BEGIN CERTIFICATE-----"
+  var footer = "-----END CERTIFICATE-----"
   cert= cert.split(header)[1]
   cert = cert.split(footer)[0]
-  cert = header + "\n" + cert.replaceAll(" ", "\n") + footer+"\n"
+  cert = header + "\n" + cert.replace(/ /g, "\n") + footer+"\n"
 
   var options = {
     key  : privatekey,
