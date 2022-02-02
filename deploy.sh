@@ -10,8 +10,6 @@ cd ExampleApplication/
 npm install
 # Export a varible used in our application so it knows to use https
 export ENV=PROD
-echo $PRIVATE_KEY
-echo $SERVER
 echo $PRIVATE_KEY > privatekey.pem
 echo $SERVER > server.crt
 # Start the application with the process name example_app using pm2
