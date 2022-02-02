@@ -8,7 +8,9 @@ pm2 stop example_app
 cd ExampleApplication/
 # Install application dependancies
 npm install
-# Redirect all traffic from port 3000 to port 80
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+# Export a varible used in our application so it knows to use https
+export ENV=PROD
+echo $privatekey > privatekey.pem
+echo $server > server.crt
 # Start the application with the process name example_app using pm2
 pm2 start ./bin/www --name example_app --env=production
