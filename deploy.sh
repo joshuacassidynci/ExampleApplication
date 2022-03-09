@@ -6,7 +6,7 @@ sudo npm install -g pm2
 pm2 stop example_app
 # change directory into folder where application is downloaded
 cd ExampleApplication/
-# Install application dependancies
+# Install application dependencies
 npm install
 echo $PRIVATE_KEY > privatekey.pem
 echo $SERVER > server.crt
