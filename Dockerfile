@@ -1,7 +1,7 @@
-FROM node:10.16.3
+FROM circleci/node:10.16.3
 ENV NODE_ENV=production
 
-RUN sudo npm install -g npm@5
+RUN npm install -g npm@5
 
 COPY ["package.json", "package-lock.json*", "./"]
 
