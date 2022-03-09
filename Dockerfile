@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install --production
+RUN npm install
 RUN echo $PRIVATE_KEY > privatekey.pem
 RUN echo $SERVER > server.crt
 

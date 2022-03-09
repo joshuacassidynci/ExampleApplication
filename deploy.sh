@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 cd ExampleApplication/
-sudo docker rm $(docker stop $(docker ps -a -q --filter ancestor=node_app --format="{{.ID}}"))
+CURRENT_INSTANCE = sudo docker ps -a -q --filter ancestor=node_app --format="{{.ID}}"
+if [ -z "$CURRENT_INSTANCE" ]
+then
+      sudo docker rm $(sudo docker stop $(CURRENT_INSTANCE))
+fi
+
 sudo docker build -t node_app .
 sudo docker run -p 8443:8443 -d node_app
 
