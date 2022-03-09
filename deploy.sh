@@ -2,7 +2,7 @@
 cd ExampleApplication/
 npm install
 CURRENT_INSTANCE=$(sudo docker ps -a -q --filter ancestor=node_app --format="{{.ID}}")
-if [ -z "$CURRENT_INSTANCE" ]
+if [ "$CURRENT_INSTANCE" ]
 then
       sudo docker rm $(sudo docker stop $CURRENT_INSTANCE)
 fi
