@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 cd ExampleApplication/
-CURRENT_INSTANCE = sudo docker ps -a -q --filter ancestor=node_app --format="{{.ID}}"
+npm install
+CURRENT_INSTANCE=sudo docker ps -a -q --filter ancestor=node_app --format="{{.ID}}"
 if [ -z "$CURRENT_INSTANCE" ]
 then
       sudo docker rm $(sudo docker stop $(CURRENT_INSTANCE))
