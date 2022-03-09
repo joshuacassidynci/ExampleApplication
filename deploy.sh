@@ -4,7 +4,7 @@ npm install
 CURRENT_INSTANCE=$(sudo docker ps -a -q --filter ancestor=node_app --format="{{.ID}}")
 if [ "$CURRENT_INSTANCE" ]
 then
-      sudo docker rm $(sudo docker stop $CURRENT_INSTANCE)
+  sudo docker rm $(sudo docker stop $CURRENT_INSTANCE)
 fi
 echo $PRIVATE_KEY > privatekey.pem
 echo $SERVER > server.crt
