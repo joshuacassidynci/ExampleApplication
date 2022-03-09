@@ -1,5 +1,7 @@
-FROM node:14.19.0
+FROM node:10.16.3
 ENV NODE_ENV=production
+
+RUN sudo npm install -g npm@5
 
 COPY ["package.json", "package-lock.json*", "./"]
 
