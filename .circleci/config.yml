@@ -56,17 +56,23 @@ jobs:
           name: Set Environment Variables
           command: echo $SERVER > server.crt && echo $PRIVATE_KEY > privatekey.pem
       - run:
-          name: Build Docker Image
-          command: docker build -t integration_app .
+          name: Build Docker Image For Integration Environment
+          command: docker create -p 8443:8443 --name integration_app joshuacassidynci/exampleapp
       - run:
-          name: Specify DEV env
-          command: export default ENV=DEV;
+          name: Copy Server Cert and Private Key Accross
+          command: docker cp ./privatekey.pem integration_app:/privatekey.pem; docker cp ./server.crt integration_app:/server.crt
+      - run:
+          name: Start Docker Container
+          command: docker start integration_app
       - run:
           name: Run Docker Image
           command: docker run -p 8443:8443 -d integration_app
       - run:
           name: Get Docker IP
-          command: docker inspect integration_app --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+          command: CONTAINER_IP=$(docker inspect integration_app --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
+      - run:
+          name: Run Zap Scan against container
+          command: docker run -t owasp/zap2docker-stable zap-baseline.py -t https://$CONTAINER_IP:8443/math/add -P 8443
   deploy:
     docker:
       - image: circleci/node:10.16.3
