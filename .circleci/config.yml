@@ -42,7 +42,7 @@ jobs:
           command: npm audit
       - run:
           name: test-run
-          command: npm run test && ls
+          command: npm run test
       - run:
           name: docker-login
           command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
@@ -53,8 +53,14 @@ jobs:
           name: Publish Docker Image
           command: docker push $IMAGE_NAME
       - run:
-          name: Publish Docker Image
-          command: docker push $IMAGE_NAME
+          name: Set Environment Variables
+          command: echo $SERVER > server.crt && echo $PRIVATE_KEY > privatekey.pem
+      - run:
+          name: Build Docker Image
+          command: docker build -t integration_app .
+      - run:
+          name: Run Docker Image
+          command: docker create -p 8443:8443 -d integration_app
   deploy:
     docker:
       - image: circleci/node:10.16.3
