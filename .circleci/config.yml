@@ -60,7 +60,7 @@ jobs:
           command: docker build -t integration_app .
       - run:
           name: Run Docker Image
-          command: docker create -p 8443:8443 -d integration_app
+          command: docker run -p 8443:8443 -d integration_app
   deploy:
     docker:
       - image: circleci/node:10.16.3
