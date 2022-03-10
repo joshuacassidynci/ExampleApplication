@@ -61,6 +61,12 @@ jobs:
       - run:
           name: Run Docker Image
           command: docker run -p 8443:8443 -d integration_app
+      - run:
+          name: Get ZAP Image
+          command: docker pull owasp/zap2docker-weekly
+      - run:
+          name: Scan Application with ZAP
+          command: docker run -t owasp/zap2docker-weekly zap-baseline.py -u https://localhost:8443
   deploy:
     docker:
       - image: circleci/node:10.16.3
