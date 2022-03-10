@@ -65,9 +65,6 @@ jobs:
           name: Start Docker Container
           command: docker start integration_app
       - run:
-          name: Run Docker Image
-          command: docker run -p 8443:8443 -d integration_app
-      - run:
           name: Get Docker IP
           command: CONTAINER_IP=$(docker inspect integration_app --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
       - run:
