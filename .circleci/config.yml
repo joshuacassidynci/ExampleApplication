@@ -65,11 +65,8 @@ jobs:
           name: Run Docker Image
           command: docker run -p 8443:8443 -d integration_app
       - run:
-          name: Get ZAP Image
-          command: docker pull owasp/zap2docker-weekly
-      - run:
-          name: Scan Application with ZAP
-          command: docker run -t owasp/zap2docker-weekly zap-baseline.py -t docker run -t owasp/zap2docker-weekly zap-baseline.py -t "http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8443/math/add"
+          name: Get Docker IP
+          command: docker inspect integration_app --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
   deploy:
     docker:
       - image: circleci/node:10.16.3
