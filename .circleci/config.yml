@@ -52,6 +52,9 @@ jobs:
       - run:
           name: Publish Docker Image
           command: docker push $IMAGE_NAME
+      - run:
+          name: Publish Docker Image
+          command: docker push $IMAGE_NAME
   deploy:
     docker:
       - image: circleci/node:10.16.3

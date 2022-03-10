@@ -30,3 +30,6 @@ docker cp ./privatekey.pem $CONTAINER_NAME:/privatekey.pem
 docker cp ./server.crt $CONTAINER_NAME:/server.crt
 # start the $CONTAINER_NAME container
 docker start $CONTAINER_NAME
+
+docker pull owasp/zap2docker-weekly
+docker run -t owasp/zap2docker-weekly zap-baseline.py -u https://localhost:8443
