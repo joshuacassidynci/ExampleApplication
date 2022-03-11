@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
-app.use(csrf({cookie:{key:'XSRF-TOKEN',path:'/', httpOnly: true, sameSite: 'lax'}}));
+app.use(csrf({cookie:{key:'XSRF-TOKEN',path:'/', secure: true, httpOnly: true, sameSite: 'lax'}}));
 
 app.use(function (req, res, next) {
   res.cookie('XSRF-TOKEN', req.csrfToken(), {
