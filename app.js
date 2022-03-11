@@ -24,6 +24,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders: (res) => {
+    res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
     res.setHeader('X-Content-Type-Options', 'nosniff')
   }
 }));

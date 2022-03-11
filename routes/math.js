@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-  res.set('Cache-Control', 'max-age=0, must-revalidate')
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.set('Content-Security-Policy', "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
   res.redirect("/math/add");
 });
@@ -25,7 +25,7 @@ router.get('/add', function(req, res, next) {
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-  res.set('Cache-Control', 'max-age=0, must-revalidate')
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.set('Content-Security-Policy', "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
   res.render('compute', { title: 'add' ,result:result, num1, num2, symbol:"+" });
 
@@ -46,7 +46,7 @@ router.get('/divide', function(req, res, next) {
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-  res.set('Cache-Control', 'max-age=0, must-revalidate')
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.set('Content-Security-Policy', "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
   res.render('compute', { title: 'divide' ,result:result, num1, num2, symbol:"/" });
 
@@ -62,7 +62,7 @@ router.get('/multiply', function(req, res, next) {
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-  res.set('Cache-Control', 'max-age=0, must-revalidate')
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.set('Content-Security-Policy', "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
   res.render('compute', { title: 'multiply' ,result:result, num1, num2, symbol:"*" });
 
@@ -82,7 +82,7 @@ router.get('/subtract', function(req, res, next) {
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-  res.set('Cache-Control', 'max-age=0, must-revalidate')
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.set('Content-Security-Policy', "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
   res.render('compute', { title: 'subtract' ,result:result, num1, num2, symbol:"-" });
 
