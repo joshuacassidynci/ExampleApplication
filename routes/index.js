@@ -3,7 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.set('Cache-control', 'public, max-age=0')
   res.set('X-Frame-Options', 'DENY')
   res.set('X-Content-Type-Options', 'nosniff')
   res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
