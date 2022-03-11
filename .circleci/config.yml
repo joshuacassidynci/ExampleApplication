@@ -47,25 +47,25 @@ jobs:
           name: docker-login
           command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
-          name: Build Docker Image
+          name: build-docker-image
           command: docker build -t $IMAGE_NAME:latest .
       - run:
-          name: Publish Docker Image
+          name: publish-docker-image
           command: docker push $IMAGE_NAME
       - run:
-          name: Set Environment Variables
+          name: set-environment-variables
           command: echo $SERVER > server.crt && echo $PRIVATE_KEY > privatekey.pem
       - run:
-          name: Build Docker Image For Integration Environment
+          name: build-docker-image-for-integration-environment
           command: docker create -p 8443:8443 --name integration_app joshuacassidynci/exampleapp
       - run:
-          name: Copy Server Cert and Private Key Accross
+          name: copy-server-cert-and-private-key-accross
           command: docker cp ./privatekey.pem integration_app:/privatekey.pem; docker cp ./server.crt integration_app:/server.crt
       - run:
-          name: Start Docker Container
+          name: start-docker-container
           command: docker start integration_app
       - run:
-          name: Run Zap Scan against container
+          name: run-zap-scan-against-container
           command: CONTAINER_IP=$(docker inspect integration_app --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'); docker run -t owasp/zap2docker-stable zap-baseline.py -t https://$CONTAINER_IP:8443/math/add -P 8443
   deploy:
     docker:
